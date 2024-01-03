@@ -13,15 +13,14 @@ return new class extends Migration
     {
         Schema::create('alamat_dan_kontaks', function (Blueprint $table) {
             $table->id();
-            // user id
             $table->unsignedBigInteger('user_id');
             $table->string('alamat_lengkap', 50)->nullable();
-            $table->integer('rt', 3)->nullable();
-            $table->integer('rw', 3)->nullable();
-            $table->string('desa/kelurahan', 30)->nullable();
+            $table->integer('rt')->nullable();
+            $table->integer('rw')->nullable();
+            $table->string('desa_kelurahan', 30)->nullable();
             $table->string('kecamatan', 30)->nullable();
-            $table->string('kabupaten/kota', 30)->nullable();
-            $table->integer('kode_pos', 5)->nullable();
+            $table->string('kabupaten_kota', 30)->nullable();
+            $table->integer('kode_pos')->nullable();
             $table->string('nomor_telepon', 15)->nullable();
             $table->string('nomor_whatsapp', 15)->nullable();
             $table->string('id_line', 20);
