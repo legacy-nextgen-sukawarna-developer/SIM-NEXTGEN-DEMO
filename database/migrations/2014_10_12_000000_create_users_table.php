@@ -13,7 +13,23 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            // user id
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->string('nama_lengkap', 50)->nullable();
+            $table->string('nama_panggilan', 50)->nullable();
+            $table->string('tempat_lahir', 50)->nullable();
+            $table->date('tanggal_lahir')->nullable();
+            $table->integer('jenis_kelamin')->nullable()->default(0);
+            $table->integer('golongan_darah')->nullable()->default(0);
+            $table->string('hobi', 50)->nullable();
+            $table->string('keahlian', 50)->nullable();
+            $table->string('sekolah', 50)->nullable();
+            $table->integer('status_sekolah')->nullable()->default(0);
+            $table->integer('foto_profil', 50)->nullable();
+            $table->integer('baptis_selam')->nullable()->default(0);
+            $table->integer('kom_100')->nullable()->default(0);
+            $table->integer('gabung_komsel')->nullable()->default(0);
+            $table->string('nama_kakak_komunitas_sel', 50)->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
