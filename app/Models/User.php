@@ -72,4 +72,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(attendance::class);
     }
+
+    // one to many relationship with the attendance
+    public function persembahan()
+    {
+        return $this->hasOne(persembahan::class);
+    }
 }

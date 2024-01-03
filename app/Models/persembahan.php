@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class role extends Model
+class persembahan extends Model
 {
     use HasFactory;
 
-    // one to one relationship with the user
+    // one to one relationship with the role
     public function user()
     {
-        return $this->hasOne(user::class);
+        return $this->belongsTo(user::class);
     }
 }
