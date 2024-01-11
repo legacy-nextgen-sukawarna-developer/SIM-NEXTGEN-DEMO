@@ -16,6 +16,7 @@ return new class extends Migration
             // user id
             $table->unsignedBigInteger('user_id');
             $table->date('waktu_absen');
+            $table->string('keterangan');
             $table->timestamps();
         });
     }
