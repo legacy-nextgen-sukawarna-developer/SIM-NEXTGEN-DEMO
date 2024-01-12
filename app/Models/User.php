@@ -19,6 +19,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'no_jemaat',
         'email',
         'password',
     ];
@@ -47,6 +48,12 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(role::class);
+    }
+
+    // one to one relationship with the role
+    public function congregation()
+    {
+        return $this->belongsTo(congregation::class);
     }
 
     // one to many relationship with the alamat_dan_kontak
