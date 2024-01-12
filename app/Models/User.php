@@ -3,10 +3,11 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -23,6 +24,26 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            $user->no_jemaat = self::generateNoJemaat();
+        });
+    }
+
+    protected static function generateNoJemaat(): string
+    {
+        $prefix = 'NSH';
+
+        // Generate a random 7-digit number
+        $randomNumber = str_pad(mt_rand(1, 999999), 6, '0', STR_PAD_LEFT);
+
+        // Combine the parts to form no_jemaat
+        return $prefix . $randomNumber;
+    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -47,10 +68,10 @@ class User extends Authenticatable
     // one to one relationship with the role
     public function role()
     {
-        return $this->belongsTo(role::class);
+        return $this->hasOne(Role::class, 'user_id');
     }
 
-    // one to one relationship with the role
+    // one to one relationship with the congregation
     public function congregation()
     {
         return $this->belongsTo(congregation::class);
